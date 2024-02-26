@@ -31,7 +31,6 @@
                 android:textSize="70sp"
                 app:cornerRadius="0dp" />
         </TableRow>
-
         <TableRow
             android:layout_weight="1"
             >
@@ -85,6 +84,62 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:text="/"/>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_weight="1"
+            >
+
+            <Button
+                android:id="@+id/log"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/grayStrong"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="log"
+                android:textColorHint="@color/orange"
+                />
+
+            <Button
+                android:id="@+id/history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/grayStrong"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="H" />
+
+            <Button
+                android:id="@+id/raiz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/grayStrong"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="√ " />
+
+            <Button
+                android:id="@+id/potencia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/orange"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="^"/>
         </TableRow>
 
         <TableRow
@@ -286,6 +341,8 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:cornerRadius="0dp" />
+
         </TableRow>
+
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
