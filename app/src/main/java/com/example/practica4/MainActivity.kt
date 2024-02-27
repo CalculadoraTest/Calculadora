@@ -2,6 +2,7 @@ package com.example.practica4
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ enum class Operaciones {
     MODULO,
     MASMENOS
 }
+
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +48,12 @@ class MainActivity : AppCompatActivity() {
         val menos:Button = findViewById(R.id.menos)
         val multiplicacion:Button = findViewById(R.id.multiplicacion)
         val igual:Button = findViewById(R.id.igual)
+        val historial:Button = findViewById(R.id.history)
+
+        historial.setOnClickListener{
+            val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)
+        }
 
         //Se asignan acciones a los botones de los números
         habilitarNumero(cero, 0, resultado)
@@ -73,6 +82,8 @@ class MainActivity : AppCompatActivity() {
             resultado.text = "0"                                //Reinicia la vista
             operacion = nuevaOperacion                          //Coloca la nueva operación
         }
+
+
 
         //Configuración de los botones de operaciones
         modulo.setOnClickListener {
