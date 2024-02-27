@@ -20,18 +20,19 @@ class HistoryAdapter(private val listaDatos:List<Operation>):RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: HistoryView, position: Int) {
         val dato:Operation = listaDatos[position]
-        holder.resultado.text = "= ${dato.result}"
-        holder.operatorOne.text = dato.operatorOne.toString()
-        holder.operatorTwo.text = dato.operatorTwo.toString()
-        holder.operation.text = when(dato.operation){
+        holder.resultado.text = dato.result.toString()
+        (position + 1).toString().also { holder.number.text = it }
+        var operator = when(dato.operation){
             Operaciones.NING -> "Error"
             Operaciones.MAS -> "+"
             Operaciones.MENOS -> "-"
-            Operaciones.MULTIPLICACION -> "X"
+            Operaciones.MULTIPLICACION -> "x"
             Operaciones.DIVISION -> "/"
             Operaciones.MODULO -> "%"
-            Operaciones.MASMENOS -> "+/-"
+            Operaciones.MASMENOS -> "±"
         }
+        "${dato.operatorOne} ${operator} ${dato.operatorTwo}".also { holder.operatorOne.text = it }
+
     }
 
 

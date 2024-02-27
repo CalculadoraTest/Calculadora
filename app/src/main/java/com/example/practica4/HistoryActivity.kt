@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
 
 class HistoryActivity: AppCompatActivity() {
 
@@ -17,21 +18,23 @@ class HistoryActivity: AppCompatActivity() {
     private lateinit var adaptador:HistoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val testOperation = listOf<Operation>(
+            Operation(5,5,Operaciones.MAS,10),
+            Operation(5,5,Operaciones.MULTIPLICACION, 25)
+        )
         setContentView(R.layout.historial)
+        val hist:ArrayList<Operation> = intent.getSerializableExtra("hist")  as? ArrayList<Operation> ?: ArrayList()
         val returnButton: ImageButton = findViewById(R.id.histReturn)
 
         returnButton.setOnClickListener{
             finish()
         }
 
-        val testOperation = listOf<Operation>(
-            Operation(5,5,Operaciones.MAS,10),
-            Operation(5,5,Operaciones.MULTIPLICACION, 25)
-        )
+
 
         recyclerView = findViewById(R.id.recycleView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adaptador = HistoryAdapter(testOperation)
+        adaptador = HistoryAdapter(hist.toList())
         recyclerView.adapter = adaptador
     }
 }

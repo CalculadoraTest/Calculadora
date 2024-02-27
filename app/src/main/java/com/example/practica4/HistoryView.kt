@@ -7,7 +7,6 @@ import org.w3c.dom.Text
 
 class HistoryView(itemView: View):RecyclerView.ViewHolder(itemView) {
     val operatorOne: TextView = itemView.findViewById(R.id.operatorOne);
-    val operatorTwo: TextView = itemView.findViewById(R.id.operatorTwo);
-    val operation:TextView = itemView.findViewById(R.id.operation);
     val resultado:TextView = itemView.findViewById(R.id.resHist)
+    val number:TextView = itemView.findViewById(R.id.number)
 }

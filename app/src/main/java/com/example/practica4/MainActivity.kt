@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calculadora)
 
+        val hist = ArrayList<Operation>()
+
         //Se recuperan todos los elementos de la vista
         val resultado:Button = findViewById(R.id.res)
         val ac:Button = findViewById(R.id.AC)
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         historial.setOnClickListener{
             val intent = Intent(this, HistoryActivity::class.java)
+            intent.putExtra("hist", hist)
             startActivity(intent)
         }
 
@@ -76,8 +79,11 @@ class MainActivity : AppCompatActivity() {
 
         //Función de apoyo para calcular operaciones continuas
         fun calcularOperacion(nuevaOperacion: Operaciones){
+
             valor2 = resultado.text.toString().toDouble() //Obtiene el valor 2 de la calculadora
-            valor1 = obtenerResultado(operacion, valor1, valor2) //Realiza el cáclulo, nuevo valor1
+            val resTpm = obtenerResultado(operacion, valor1, valor2)
+            hist.add(Operation(valor1, valor2, nuevaOperacion, resTpm))
+            valor1 = resTpm //Realiza el cáclulo, nuevo valor1
             valor2 = 0.0                                        //Reinicia el valor2
             resultado.text = "0"                                //Reinicia la vista
             operacion = nuevaOperacion                          //Coloca la nueva operación
@@ -143,8 +149,17 @@ class MainActivity : AppCompatActivity() {
 
         igual.setOnClickListener {//El igual obtiene el resultado
             valor2 = resultado.text.toString().toDouble() //Obtiene la ultima entrada
-            if(operacion != Operaciones.NING) resultado.text =
-                formatearDouble(obtenerResultado(operacion, valor1, valor2)) //Realiza la operación
+
+            if(operacion != Operaciones.NING) {
+                var res = obtenerResultado(
+                    operacion,
+                    valor1,
+                    valor2
+                )
+                resultado.text =
+                    formatearDouble(res) //Realiza la operación
+                hist.add(Operation(valor1, valor2, operacion, res))
+            }
             operacion = Operaciones.NING    //Reinicia la operación
         }
 
