@@ -30,6 +30,9 @@ class HistoryAdapter(private val listaDatos:List<Operation>):RecyclerView.Adapte
             Operaciones.DIVISION -> "/"
             Operaciones.MODULO -> "%"
             Operaciones.MASMENOS -> "±"
+            Operaciones.POTENCIA -> "^"
+            Operaciones.LOGARITMO -> "log"
+            Operaciones.RAIZ -> "√"
         }
         "${dato.operatorOne} ${operator} ${dato.operatorTwo}".also { holder.operatorOne.text = it }
 
