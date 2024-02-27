@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kotlin.math.log
+import kotlin.math.log10
+import kotlin.math.sqrt
 
 enum class Operaciones {
     NING,
@@ -17,7 +20,10 @@ enum class Operaciones {
     MULTIPLICACION,
     DIVISION,
     MODULO,
-    MASMENOS
+    MASMENOS,
+    POTENCIA,
+    LOGARITMO,
+    RAIZ
 }
 
 
@@ -32,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         //Se recuperan todos los elementos de la vista
         val resultado:Button = findViewById(R.id.res)
         val ac:Button = findViewById(R.id.AC)
+        val potencia:Button = findViewById(R.id.potencia)
+        val logaritmo:Button = findViewById(R.id.log)
+        val raiz:Button = findViewById(R.id.raiz)
         val modulo:Button = findViewById(R.id.modulo)
         val masmenos:Button = findViewById(R.id.masmenos)
         val division:Button = findViewById(R.id.division)
@@ -180,7 +189,31 @@ class MainActivity : AppCompatActivity() {
             val clipdata = ClipData.newPlainText("Resultado copiado", resultado.text.toString())
             clipboard.setPrimaryClip(clipdata)
         }
-
+        potencia.setOnClickListener {
+            if (operacion == Operaciones.NING) {
+                operacion = Operaciones.POTENCIA
+                valor1 = resultado.text.toString().toDouble()
+                resultado.text = "0"
+            }else{
+                calcularOperacion(Operaciones.POTENCIA)
+            }
+        }
+        raiz.setOnClickListener {
+            if (operacion == Operaciones.NING) {
+                operacion = Operaciones.RAIZ
+                valor1 = resultado.text.toString().toDouble()
+            }else{
+                calcularOperacion(Operaciones.RAIZ)
+            }
+        }
+        logaritmo.setOnClickListener {
+            if (operacion == Operaciones.NING) {
+                operacion = Operaciones.LOGARITMO
+                valor1 = resultado.text.toString().toDouble()
+            }else{
+                calcularOperacion(Operaciones.LOGARITMO)
+            }
+        }
     }
 
     private fun formatearDouble(numero: Double): String {
@@ -204,10 +237,26 @@ class MainActivity : AppCompatActivity() {
             Operaciones.DIVISION -> calDiv(val1, val2)
             Operaciones.MULTIPLICACION -> calMul(val1, val2)
             Operaciones.MASMENOS -> calMasMenos(val1)
+            Operaciones.POTENCIA -> calPotencia(val1,val2)
+            Operaciones.LOGARITMO -> calLog(val1)
+            Operaciones.RAIZ-> calRaiz(val1)
             Operaciones.NING -> 0.0
         }
     }
+    private fun calPotencia(val1: Double, val2: Double): Double {
+        //Calcula la potencia
 
+        return Math.pow(val1,val2)
+    }
+    private fun calRaiz(val1: Double): Double {
+        //Calcula la Raiz
+
+        return sqrt(val1)
+    }
+    private fun calLog(val1: Double): Double {
+        //Calcula la logaritmo
+        return log10(val1)
+    }
     private fun calModulo(val1: Double, val2: Double): Double {
         //Calcula el modulo
         return val1 % val2
