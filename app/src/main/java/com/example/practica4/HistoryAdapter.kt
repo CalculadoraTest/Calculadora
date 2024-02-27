@@ -34,8 +34,11 @@ class HistoryAdapter(private val listaDatos:List<Operation>):RecyclerView.Adapte
             Operaciones.LOGARITMO -> "log"
             Operaciones.RAIZ -> "√"
         }
-        "${dato.operatorOne} ${operator} ${dato.operatorTwo}".also { holder.operatorOne.text = it }
-
+        if(dato.operation != Operaciones.RAIZ && dato.operation != Operaciones.LOGARITMO){
+            "${dato.operatorOne} ${operator} ${dato.operatorTwo}".also { holder.operatorOne.text = it }
+        }else{
+            "${operator}${dato.operatorTwo}".also { holder.operatorOne.text = it }
+        }
     }
 
 
